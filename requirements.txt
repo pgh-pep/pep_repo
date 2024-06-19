@@ -1,0 +1,4 @@
+# LOCAL DEV INSTRUCTIONS: pip install -r requirements.txt
+
+black == 24.4.2
+isort == 5.13.2
