@@ -1,0 +1,47 @@
+{
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 4
+  },
+
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.tabSize": 4
+  },
+
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+
+  "[yaml]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+
+  "isort.args": [
+    "--atomic",
+    "--line-length=150",
+    "--lines-after-imports=2",
+    "--lines-between-types=1",
+    "--profile=black",
+    "--python-version=310",
+    "--skip-gitignore"
+  ],
+  "isort.check": true,
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true
+}
