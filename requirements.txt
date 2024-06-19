@@ -1,4 +1,10 @@
 # LOCAL DEV INSTRUCTIONS: pip install -r requirements.txt
+# NOTE: Not all used, for introduction purposes
 
 black == 24.4.2
 isort == 5.13.2
+pathlib == 1.0.1
+numpy == 1.22.4
+opencv-python == 4.10.0.84
+matplotlib == 3.5.1
+pandas == 2.2.2
