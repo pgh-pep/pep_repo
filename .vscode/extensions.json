@@ -1,0 +1,29 @@
+{
+    "recommendations": [
+      "DavidAnson.vscode-markdownlint",
+      "eamodio.gitlens",
+      "esbenp.prettier-vscode",
+      "foxundermoon.shell-format",
+      "GitLab.gitlab-workflow",
+      "mads-hartmann.bash-ide-vscode",
+      "mhutchie.git-graph",
+      "ms-azuretools.vscode-docker",
+      "ms-iot.vscode-ros",
+      "ms-python.black-formatter",
+      "ms-python.isort",
+      "ms-python.mypy-type-checker",
+      "ms-python.pylint",
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-vscode.cpptools",
+      "redhat.vscode-xml",
+      "redhat.vscode-yaml",
+      "sourcery.sourcery",
+      "tamasfe.even-better-toml",
+      "timonwong.shellcheck",
+      "twxs.cmake",
+      "usernamehw.errorlens",
+      "VisualStudioExptTeam.vscodeintellicode",
+    ]
+  }
+  
