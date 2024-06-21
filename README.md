@@ -2,14 +2,23 @@
 
 ![alt text](https://www.sustainable.pitt.edu/wp-content/uploads/2022/08/Pitt-Electric-Propulsion-Logo.png)
 
-Collaborative codebase for Pitt Electric Propulsion's Autonomous Project.
-
 FINISH LATER
+
+Collaborative codebase for Pitt Electric Propulsion's Autonomous Project (2024- )
+
+To contact us: <br />
+Website: [https://www.pittelectricpropulsion.com/](https://www.pittelectricpropulsion.com/) <br />
+Email: pittsburghpep@gmail.com
+
 
 ## About Us
 
-Pitt Electric Propulsion is the Univerisity of Pittsburgh's first electric vehicle team.
-
-## Installation
+Pitt Electric Propulsion is the University of Pittsburgh's first electric vehicle team. 
 
 ## Contribution
+
+### Local Installation
+
+### Docker
+
+### Contribution Steps
