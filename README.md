@@ -21,4 +21,4 @@ Pitt Electric Propulsion is the University of Pittsburgh's first electric vehicl
 
 ### Docker
 
-### Contribution Steps
+### Contribution
