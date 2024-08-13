@@ -141,6 +141,11 @@ To start your ROS2 workspace (make sure you are in `pep_repo`):
 ```bash
 colcon build --symlink-install
 ```
+Finally, source your ROS2 workspace:
+
+```bash
+echo "source ~/pep_repo/install/setup.bash" >> ~/.bashrc
+```
 
 Your PEP developer desktop is all set up! You can work on other projects as well using this WSL Distro.
 
