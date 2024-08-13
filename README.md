@@ -14,11 +14,3 @@ Email: pittsburghpep@gmail.com
 ## About Us
 
 Pitt Electric Propulsion is the University of Pittsburgh's first electric vehicle team. 
-
-## Contribution
-
-### Local Installation
-
-### Docker
-
-### Contribution
