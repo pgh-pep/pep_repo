@@ -1,7 +1,7 @@
 # LOCAL DEV INSTRUCTIONS: pip install -r requirements.txt
 # NOTE: Not all used, for introduction purposes
 
-ruff = 0.5.7
+ruff == 0.5.7
 pathlib == 1.0.1
 opencv-python == 4.10.0.84
 matplotlib == 3.8.3
