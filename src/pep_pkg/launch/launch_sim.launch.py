@@ -13,14 +13,9 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-
     rsp = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            [
-                os.path.join(
-                    get_package_share_directory("pep_pkg"), "launch", "rsp.launch.py"
-                )
-            ]
+            [os.path.join(get_package_share_directory("pep_pkg"), "launch", "rsp.launch.py")]
         ),
         launch_arguments={"use_sim_time": "true"}.items(),
     )

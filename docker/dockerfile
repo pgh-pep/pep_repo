@@ -1,0 +1,50 @@
+FROM osrf/ros:humble-desktop
+
+# NOTE: This dockerfile is not complete for dev purposes.
+# It is here to store for deployment needs later.
+#      -Varun
+
+# Add vscode user with same UID and GID as your host system
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+# Add a non-root user
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
+
+# Set up sudo privilages
+RUN apt-get update \
+    && apt-get install -y sudo \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
+    && rm -rf /var/lib/apt/lists/*
+
+# Switch from root to user
+USER $USERNAME
+
+# Add user to video group to allow access to webcam
+RUN sudo usermod --append --groups video $USERNAME
+
+# Install packages w/ apt
+# NOTE: PyPI packages are installed w/ a postCreateCommand (in devcontainers.json)
+RUN sudo apt-get update && sudo apt-get upgrade -y  \
+    && sudo apt-get install -y \
+    nano \
+    python3-pip \
+    bash-completion \
+    python-is-python3 \
+    ros-dev-tools \
+    && sudo rm -rf /var/lib/apt/lists/*
+
+#TO DO LIST
+#install gazebo, rqt, rviz and other GUI tools
+
+# Rosdep update
+RUN rosdep update
+
+# Source the ROS setup file and colcon argcomplete
+RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc \
+    && echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc
+
+LABEL maintainer = "Varun Patel vap77@pitt.edu"
