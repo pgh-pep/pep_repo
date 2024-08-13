@@ -16,6 +16,7 @@ data_files.append(
         glob("models/*.urdf.xacro") + glob("models/*.xacro"),
     )
 )
+data_files.append((os.path.join("share", package_name, "config"), glob("config/*.yaml")))
 
 # Add new nodes to entrypoints
 setup(
@@ -26,8 +27,8 @@ setup(
     install_requires=["setuptools"],
     zip_safe=True,
     maintainer="Varun Patel",
-    maintainer_email="varunpat789@gmail.com",
-    description="Core PEP autonomous package",
+    maintainer_email="vap77.com",
+    description="PEP Autonomous Package",
     license="MIT",
     tests_require=["pytest"],
     entry_points={
