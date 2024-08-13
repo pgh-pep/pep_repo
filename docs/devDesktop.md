@@ -141,6 +141,7 @@ To start your ROS2 workspace (make sure you are in `pep_repo`):
 ```bash
 colcon build --symlink-install
 ```
+
 Finally, source your ROS2 workspace:
 
 ```bash
