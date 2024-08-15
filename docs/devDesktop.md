@@ -8,7 +8,7 @@ We will be using [ROS2](https://docs.ros.org/en/humble/index.html) as our framew
 
 Make sure Windows is up to date.
 
-NOTE: WSL Install instructions vary depending on Windows version. For help on any errors that may occur: 
+NOTE: WSL install instructions vary depending on Windows version. For help on any errors that may occur: 
   - https://learn.microsoft.com/en-us/windows/wsl/install-manual
   - https://learn.microsoft.com/en-us/windows/wsl/troubleshooting
 
