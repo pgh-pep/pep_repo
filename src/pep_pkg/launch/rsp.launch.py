@@ -18,6 +18,7 @@ def generate_launch_description():
 
     pkg_path = os.path.join(get_package_share_directory("pep_pkg"))
     xacro_file = os.path.join(pkg_path, "models", "robot.urdf.xacro")
+
     robot_description_config = xacro.process_file(xacro_file)
 
     params = {
