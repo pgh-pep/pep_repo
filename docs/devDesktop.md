@@ -1,6 +1,7 @@
 # Setting up PEP Development Environment
 
-We will be using [ROS2](https://docs.ros.org/en/humble/index.html) as our framework
+We will be using [ROS2](https://docs.ros.org/en/humble/index.html) as our framework.
+Make sure to have [VSCode](https://code.visualstudio.com/download) installed.
 
 ## Developing using WLS
 
@@ -16,6 +17,7 @@ wsl --set-default-version 2
 ```
 
 You will be promted to enter a username and password followed by a successful installation message.
+(Your password will not be shown when typing for security reasons)
 
 To confirm a successful installation of WSL and Ubuntu, you can list your currently installed distros with:
 
@@ -23,11 +25,9 @@ To confirm a successful installation of WSL and Ubuntu, you can list your curren
 wsl --list -v
 ```
 
-I recommend installing the [Windows Terminal](https://www.microsoft.com/store/productId/9N0DX20HK701?ocid=pdpshare) tool. (Will need to select it as the default terminal)
+### 2. ROS Installation
 
-### 3. ROS Installation
-
-Open the bash terminal of your newly installed Ubuntu distro.
+Open the bash terminal of your newly installed distro by opening the Ubuntu app.
 
 Update and upgrade packages:
 
@@ -89,7 +89,7 @@ gazebo
 
 ### 4. Set up Git
 
-Set up Git credentials:
+Set up Git credentials that match your GitHub information:
 
 ```bash
 git config --global user.name "your_user_name"
@@ -126,6 +126,8 @@ code .
 
 Or open up [VSCode](https://code.visualstudio.com/download) on your Windows machine. Install the Remote Development Extension.
 In the bottom-left, click on the Remote Window button (blue w/ arrows).
+![alt text](https://www.google.com/url?sa=i&url=https%3A%2F%2Fcode.visualstudio.com%2Fblogs%2F2019%2F10%2F03%2Fremote-ssh-tips-and-tricks&psig=AOvVaw13Jo_uIks_Zv0X1j20n6WC&ust=1724720648207000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMjep6u8kYgDFQAAAAAdAAAAABAE)
+
 Select `Connect to WSL using Distro` and select `Ubuntu-22.04`.
 
 This will open VSCode in your newly made WSL environment.
