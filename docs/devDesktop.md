@@ -130,7 +130,7 @@ code .
 
 Or open up [VSCode](https://code.visualstudio.com/download) on your Windows machine. Install the Remote Development Extension.
 In the bottom-left, click on the Remote Window button (blue w/ arrows).
-![alt text](https://www.google.com/url?sa=i&url=https%3A%2F%2Fcode.visualstudio.com%2Fblogs%2F2019%2F10%2F03%2Fremote-ssh-tips-and-tricks&psig=AOvVaw13Jo_uIks_Zv0X1j20n6WC&ust=1724720648207000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMjep6u8kYgDFQAAAAAdAAAAABAE)
+![alt text](https://canonical-ubuntu-wsl.readthedocs-hosted.com/en/latest/_images/remote-extension.png)
 
 Select `Connect to WSL using Distro` and select `Ubuntu-22.04`.
 
