@@ -17,13 +17,18 @@ To install WSL2, in a PowerShell or Windows Command Prompt run:
 
 ```powershell
 wsl --install -d Ubuntu-22.04
-wsl --set-default-version 2
 ```
 
 You will be promted to enter a username and password followed by a successful installation message.
 (Your password will not be shown when typing for security reasons)
 
-To confirm a successful installation of WSL and Ubuntu, you can list your currently installed distros with:
+In another terminal, you can ensure that WSL is set to the correct version:
+
+```powershell
+wsl --set-default-version 2
+```
+
+To confirm a successful installation of WSL and Ubuntu, you can list your currently installed distros:
 
 ```powershell
 wsl --list -v
