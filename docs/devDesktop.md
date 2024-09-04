@@ -20,7 +20,7 @@ wsl --install -d Ubuntu-22.04
 ```
 
 You will be promted to enter a username and password followed by a successful installation message.
-(Your password will not be shown when typing for security reasons)
+(You won't be able to see yourself typing the password for security reasons)
 
 In another terminal, you can ensure that WSL is set to the correct version:
 
