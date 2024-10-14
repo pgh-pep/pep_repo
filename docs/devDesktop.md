@@ -9,26 +9,22 @@ Make sure to have [VSCode](https://code.visualstudio.com/download) installed.
 
 Make sure Windows is up to date.
 
-NOTE: WSL install instructions vary depending on Windows version. For help on any errors that may occur: 
-  - https://learn.microsoft.com/en-us/windows/wsl/install-manual
-  - https://learn.microsoft.com/en-us/windows/wsl/troubleshooting
+NOTE: WSL install instructions vary depending on Windows version. For help on any errors that may occur:
+
+- <https://learn.microsoft.com/en-us/windows/wsl/install-manual>
+- <https://learn.microsoft.com/en-us/windows/wsl/troubleshooting>
 
 To install WSL2, in a PowerShell or Windows Command Prompt run:
 
 ```powershell
 wsl --install -d Ubuntu-22.04
-```
-
-You will be promted to enter a username and password followed by a successful installation message.
-(You won't be able to see yourself typing the password for security reasons)
-
-In another terminal, you can ensure that WSL is set to the correct version:
-
-```powershell
 wsl --set-default-version 2
 ```
 
-To confirm a successful installation of WSL and Ubuntu, you can list your currently installed distros:
+You will be promted to enter a username and password followed by a successful installation message.
+(Your password will not be shown when typing for security reasons)
+
+To confirm a successful installation of WSL and Ubuntu, you can list your currently installed distros with:
 
 ```powershell
 wsl --list -v
