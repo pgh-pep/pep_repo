@@ -19,10 +19,10 @@ find_package(OpenCV REQUIRED)
 find_package(cv_bridge REQUIRED)
 
 # Include directories
-include_directories(include)
+# include_directories(include)
 
 install(
-    DIRECTORY config include launch models scripts src pep_pkg
+    DIRECTORY config launch models scripts src pep_pkg
     DESTINATION share/${PROJECT_NAME}
 )
 
