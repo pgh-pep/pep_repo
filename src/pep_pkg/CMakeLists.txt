@@ -18,6 +18,8 @@ find_package(std_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(cv_bridge REQUIRED)
 
+find_package(interfaces REQUIRED) # For our custom interfaces
+
 # Include directories
 include_directories(include)
 
@@ -42,6 +44,9 @@ ament_python_install_package(${PROJECT_NAME})
 # Install Python executables
 install(PROGRAMS
     scripts/test_subscriber.py # Add each python node
+    scripts/buoy_detection.py
+    scripts/depth_slice.py
+    scripts/main.py
     DESTINATION lib/${PROJECT_NAME}
 )
 
