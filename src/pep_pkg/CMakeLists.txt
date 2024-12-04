@@ -47,6 +47,7 @@ install(PROGRAMS
     scripts/buoy_detection.py
     scripts/depth_slice.py
     scripts/main.py
+    scripts/camera.py
     DESTINATION lib/${PROJECT_NAME}
 )
 
