@@ -43,11 +43,13 @@ ament_python_install_package(${PROJECT_NAME})
 
 # Install Python executables
 install(PROGRAMS
-    scripts/test_subscriber.py # Add each python node
+    #scripts/test_subscriber.py # Add each python node
+    #scripts/buoy_detection.py
+    #scripts/depth_slice.py
+    #scripts/main.py
+    #scripts/camera.py
     scripts/buoy_detection.py
     scripts/depth_slice.py
-    scripts/main.py
-    scripts/camera.py
     DESTINATION lib/${PROJECT_NAME}
 )
 
