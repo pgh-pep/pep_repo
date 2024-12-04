@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
 import rclpy
-from rclpy.node import Node
-from interfaces.msg import DepthSlice as DepthSliceMsg
 from interfaces.msg import BuoyLocation as BuoyLocationMsg
+from interfaces.msg import DepthSlice as DepthSliceMsg
 from interfaces.srv import GetBuoyLocation
+from rclpy.node import Node
+
 
 class DepthSlice(Node):
     def __init__(self):
-        super().__init__('depth_slice')
+        super().__init__("depth_slice")
 
-        self.publisher = self.create_publisher(DepthSliceMsg, 'depth_slice', 10)
-        self.subscriber = self.create_subscription(BuoyLocationMsg, 'process_depth_slice', self.process_depth_slice_callback, 10)
+        self.publisher = self.create_publisher(DepthSliceMsg, "depth_slice", 10)
+        self.subscriber = self.create_subscription(
+            BuoyLocationMsg, "process_depth_slice", self.process_depth_slice_callback, 10
+        )
 
-        self.buoy_detection_client = self.create_client(GetBuoyLocation, 'get_buoy_location')
+        self.buoy_detection_client = self.create_client(GetBuoyLocation, "get_buoy_location")
         self.buoy_detection_client.wait_for_service()
         self.request = GetBuoyLocation.Request()
-
 
     def process_depth_slice_callback(self, buoy_location):
         print("Processing depth slice...", buoy_location)
@@ -35,12 +37,11 @@ def main():
     rclpy.init()
 
     depth_slice = DepthSlice()
-    print("Yeah we up")
     rclpy.spin(depth_slice)
 
     depth_slice.destroy_node()
     rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

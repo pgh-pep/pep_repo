@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 import rclpy
-from rclpy.node import Node
 from interfaces.srv import GetBuoyLocation
+from rclpy.node import Node
+
 
 class BuoyDetector(Node):
     def __init__(self):
-        super().__init__('buoy_detector')
-        self.srv = self.create_service(GetBuoyLocation, 'get_buoy_location', self.get_buoy_location_callback)
-        self.get_logger().info('Buoy detector service has been started...')
+        super().__init__("buoy_detector")
+        self.srv = self.create_service(GetBuoyLocation, "get_buoy_location", self.get_buoy_location_callback)
+        self.get_logger().info("Buoy detector service has been started...")
 
     def get_buoy_location_callback(self, request, response):
-        response.left = 69
-        response.top = 69
-        response.width = 420
-        response.height = 420
+        response.location.left = 69
+        response.location.top = 69
+        response.location.width = 420
+        response.location.height = 420
 
-        self.get_logger().info('Incoming request')
-        print(response)
+        self.get_logger().info("BuoyLocation: " + str(response.location))
         return response
 
 
@@ -29,5 +29,5 @@ def main():
     rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

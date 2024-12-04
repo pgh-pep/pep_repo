@@ -18,11 +18,12 @@ class DepthSubscriber(Node):
             self.depth_callback,
             10,
         )
+        # The camera image cannot be directly sent as a message, we use a bridge to transmit instead
         self.bridge = CvBridge()
 
     def depth_callback(self, msg):
         try:
-            # Convert ROS Image message to a NumPy array
+            # Use the bridge to convert the image msg to a format we can use
             depth_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
 
             # Example: Display the depth image using OpenCV
@@ -41,9 +42,7 @@ def main(args=None):
     rclpy.init(args=args)
     node = DepthSubscriber()
     try:
-        print("Spinning")
         rclpy.spin(node)
-        print("Post spin")
     except KeyboardInterrupt:
         pass
     finally:
