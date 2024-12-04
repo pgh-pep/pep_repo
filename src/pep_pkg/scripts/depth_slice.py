@@ -11,7 +11,7 @@ class DepthMaskNode(Node):
     def __init__(self):
         super().__init__("depth_mask_node")
 
-        # Subscribers for depth image and buoy location
+        # Subscribers for depth and buoy messages
         self.depth_subscriber = Subscriber(self, Image, "/camera/camera/depth/image_rect_raw")
         self.buoy_subscriber = Subscriber(self, BuoyLocation, "buoy_location")
 
@@ -21,37 +21,28 @@ class DepthMaskNode(Node):
         )
         self.sync.registerCallback(self.sync_callback)
 
-        # Publisher for the processed depth slice
+        # Publisher for depth slice
         self.publisher = self.create_publisher(DepthSlice, "depth_slice", 10)
 
-        # CV Bridge for converting ROS Image to NumPy
         self.bridge = CvBridge()
 
     def sync_callback(self, depth_msg, buoy_msg):
         try:
-            self.get_logger().info("Yeah")
-            # Convert depth image to a NumPy array
-            # depth_image = self.bridge.imgmsg_to_cv2(depth_msg, desired_encoding="passthrough")
+            depth_image = self.bridge.imgmsg_to_cv2(depth_msg, desired_encoding="passthrough")
 
-            # Create a masked depth array initialized to -1
-            # masked_depth = np.full(depth_image.shape, -1, dtype=np.float32)
+            # Clamps the buoy location to the image boundaries
+            clamped_left = max(0, buoy_msg.left)
+            clamped_right = min(depth_image.shape[1], buoy_msg.left + buoy_msg.width)
+            clamped_top = max(0, buoy_msg.top)
+            clamped_bottom = min(depth_image.shape[0], buoy_msg.top + buoy_msg.height)
 
-            # Apply buoy mask based on the buoy location
-            # left, top, width, height = buoy_msg.left, buoy_msg.top, buoy_msg.width, buoy_msg.height
-            # masked_depth[top : top + height, left : left + width] = depth_image[top : top + height, left : left + width]
+            # Samples the middle pixel of the buoy location for the depth
+            buoy_depth = float(depth_image[(clamped_left + clamped_right) // 2, (clamped_top + clamped_bottom) // 2])
 
-            # Publish the masked depth array
-            # msg = DepthSlice()
-            # msg.depth_array = masked_depth.flatten().tolist()
-            # self.publisher.publish(msg)
-
-            # print("Processing depth slice...", buoy_location)
             slice = [-1.0] * 1280
-
-            # Populates the slice with the depth of the buoy, wherever it is
-            left, right = max(0, buoy_msg.left), min(1280 - 1, buoy_msg.left + buoy_msg.width)
-            for i in range(left, right):
-                slice[i] = 1.0
+            # Populates the slice with the depth of the buoy
+            for i in range(clamped_left, clamped_right):
+                slice[i] = buoy_depth
 
             msg = DepthSlice()
             msg.depth_slice = slice
