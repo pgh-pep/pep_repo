@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!--inertial_xacro_file-->
+    <xacro:include filename="inertial_macros.xacro" />
+
+
+    <!-- materials/colors -->
+
+    <material name="white">
+        <color rgba="1 1 1 1" />
+    </material>
+
+    <material name="orange">
+        <color rgba="1 0.3 0.01 1" />
+    </material>
+
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1" />
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1" />
+    </material>
+
+
+    <!--HULL/BASE_LINK-->
+    <link name="base_footprint"/>
+
+    <link name="base_link">
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value=".001"/>
+            <inertia ixx=".001"
+                ixy=".001"
+                ixz=".001"
+                iyy=".001"
+                iyz=".001"
+                izz=".001"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0"
+                rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find pep_sim_pkg)/meshes/boat_base.stl" scale=".01 .01 .01"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find pep_sim_pkg)/meshes/boat_base.stl" scale=".01 .01 .01"/>
+            </geometry>
+        </collision>
+    </link>
+
+
+    <joint name="base_footprint_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+    </joint>
+
+
+    <!-- OUTBOARD/MOTOR -->
+    <link name="outboard_link">
+      <inertial>
+            <origin xyz="0 0 0" rpy="1.5708 0 -3.1450"/>
+            <mass value=".001"/>
+            <inertia ixx=".001"
+                ixy=".001"
+                ixz=".001"
+                iyy=".001"
+                iyz=".001"
+                izz=".001"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -3.1450"/>
+            <geometry>
+                <mesh filename="file://$(find pep_sim_pkg)/meshes/outboard.stl" scale=".004 .004 .004"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="1.5708 0 -3.1450"/>
+            <geometry>
+                <mesh filename="file://$(find pep_sim_pkg)/meshes/outboard.stl" scale=".004 .004 .004"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- PROPELLER -->
+    <link name="propeller_link">
+      <inertial>
+            <origin xyz="-.3 .15 -.2" rpy="0 0 -1.5708"/>
+            <mass value=".001"/>
+            <inertia ixx=".001"
+                ixy=".001"
+                ixz=".001"
+                iyy=".001"
+                iyz=".001"
+                izz=".001"/>
+        </inertial>
+        <visual>
+            <origin xyz="-.3 .15 -.2"
+                rpy="0 0 -1.5708"/>
+            <geometry>
+                <mesh filename="file://$(find pep_sim_pkg)/meshes/propeller.stl" scale=".0015 .0015 .0015"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <origin xyz="-.3 .15 -.2" rpy="0 0 -1.5708"/>
+            <geometry>
+                <mesh filename="file://$(find pep_sim_pkg)/meshes/propeller.stl" scale=".0015 .0015 .0015"/>
+            </geometry>
+        </collision>
+    </link>
+
+
+    <!-- THRUSTER -->
+    <joint name="base_outboard_joint" type="revolute">
+        <axis xyz="0 0 1"/>
+        <origin xyz="-1.35 0.0 .15" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="outboard_link"/>
+
+    	<limit lower="-1.5708" upper="1.5708" effort="10" velocity="3"/>
+        <dynamics friction="0.05" damping = "0.05"/>
+
+    </joint>
+
+    <joint name="motor_joint" type="continuous">
+        <axis xyz="1 0 0"/>
+        <origin xyz="-.05 0 -.175" rpy="0 0 0"/>
+        <parent link="outboard_link"/>
+        <child link="propeller_link"/>
+
+        <!-- <limit lower="-1.5708" upper="1.5708" effort="100" velocity="10" /> -->
+        <dynamics friction="0.05" damping = "0.05"/>
+    </joint>
+
+
+    <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+      <joint_name>motor_joint</joint_name>
+      <thrust_coefficient>0.0001</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.01</propeller_diameter>
+      <velocity_control>true</velocity_control>
+    </plugin>
+
+
+
+    <!-- CAMERA -->
+
+
+    <!-- HYDRODYNAMICS -->
+    <!-- <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+
+    <plugin filename="gz-sim-buoyancy-system" name="gz::sim::systems::Buoyancy">
+      <graded_buoyancy>
+        <default_density>1025</default_density>
+        <density_change>
+          <above_depth>0</above_depth>
+          <density>1.125</density>
+        </density_change>
+      </graded_buoyancy>
+    </plugin>
+
+    <plugin
+        filename="gz-sim-hydrodynamics-system"
+        name="gz::sim::systems::Hydrodynamics">
+        <link_name>base_link</link_name>
+        <xDotU>-0.04876161</xDotU>
+        <yDotV>-1.26324739</yDotV>
+        <zDotW>-1.26324739</zDotW>
+        <kDotP>0</kDotP>
+        <mDotQ>-0.3346</mDotQ>
+        <nDotR>-0.3346</nDotR>
+        <xUabsU>-0.62282</xUabsU>
+        <xU>-5</xU>
+        <yVabsV>-60.127</yVabsV>
+        <yV>-5</yV>
+        <zWabsW>-6.0127</zWabsW>
+        <zW>-100</zW>
+        <kPabsP>-0.001916</kPabsP>
+        <kP>-1</kP>
+        <mQabsQ>-6.32698957</mQabsQ>
+        <mQ>-1</mQ>
+        <nRabsR>-6.32698957</nRabsR>
+        <nR>-1</nR>
+      </plugin> -->
+
+</robot>

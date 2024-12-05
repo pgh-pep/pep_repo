@@ -1,0 +1,23 @@
+joy_teleop:
+    ros__parameters:
+        thruster:
+            type: topic
+            interface_type: std_msgs/msg/Float64
+            topic_name: /pepbot/thrust
+            deadman_buttons: [6]
+            axis_mappings:
+                data:
+                    axis: 1
+                    scale: 10
+                    offset: 0
+
+        outboard_servo:
+            type: topic
+            interface_type: std_msgs/msg/Float64
+            topic_name: /pepbot/outboard_servo
+            deadman_buttons: [6]
+            axis_mappings:
+                data:
+                    axis: 0
+                    scale: -1.0
+                    offset: 0

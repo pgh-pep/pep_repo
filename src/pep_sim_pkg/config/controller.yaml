@@ -1,0 +1,16 @@
+controller_manager:
+    ros__parameters:
+        update_rate: 1000
+        use_sim_time: true
+
+        joint_state_broadcaster:
+            type: joint_state_broadcaster/JointStateBroadcaster
+
+        velocity_trajectory_controller:
+            type: velocity_controllers/JointGroupVelocityController
+
+velocity_trajectory_controller:
+    ros__parameters:
+        joints:
+        - base_outboard_joint
+        - motor_joint

@@ -1,0 +1,4 @@
+# params.yml
+gazebo:
+    ros__parameters:
+        publish_rate: 100.0

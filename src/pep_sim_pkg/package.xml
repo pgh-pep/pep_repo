@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>pep_sim_pkg</name>
+  <version>0.0.0</version>
+  <description> The pep_sim_pkg</description>
+  <maintainer email="varunpat789@gmail.com">varun</maintainer>
+  <license>TODO: License declaration</license>
+
+  <depend>rclpy</depend>
+  <depend>gazebo_ros</depend>
+  <depend>joint_state_publisher_gui</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+
+
+
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
