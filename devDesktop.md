@@ -116,6 +116,24 @@ Add the key to your [github account](https://docs.github.com/en/authentication/c
 
 ### 5. Set up the Repository
 
+Desired File Structure:
+
+```
+~/pep_ASNE
+├── pep_ws
+│   ├── build   (auto-generated w/ colcon)
+│   ├── install (auto-generated w/ colcon)
+│   ├── log     (auto-generated w/ colcon)
+│   └── src
+│       └── pep_repo
+└── vrx_ws
+    ├── build   (auto-generated w/ colcon)
+    ├── install (auto-generated w/ colcon)
+    ├── log     (auto-generated w/ colcon)
+    └── src
+        └── vrx
+```
+
 In your bash terminal, clone the `pep_repo` repository with SSH:
 
 ```bash
