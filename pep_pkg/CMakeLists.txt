@@ -22,7 +22,7 @@ find_package(cv_bridge REQUIRED)
 include_directories(include)
 
 install(
-    DIRECTORY config include launch models scripts src pep_pkg
+    DIRECTORY config launch models pep_pkg scripts src worlds
     DESTINATION share/${PROJECT_NAME}
 )
 
