@@ -67,7 +67,7 @@ source ~/.bashrc
 ```
 
 ```bash
-sudo apt-get install python3-rosdep -y
+sudo apt-get install python3-rosdep2 python3-colcon-common-extensions libsdl1.2-dev -y
 sudo rosdep init
 rosdep update
 ```
@@ -116,16 +116,80 @@ Add the key to your [github account](https://docs.github.com/en/authentication/c
 
 ### 5. Set up the Repository
 
+Desired File Structure:
+
+```
+~/pep_ASNE
+├── pep_ws
+│   ├── build   (auto-generated w/ colcon)
+│   ├── install (auto-generated w/ colcon)
+│   ├── log     (auto-generated w/ colcon)
+│   └── src
+│       └── pep_repo
+└── vrx_ws      (If need simulation software)
+    ├── build   (auto-generated w/ colcon)
+    ├── install (auto-generated w/ colcon)
+    ├── log     (auto-generated w/ colcon)
+    └── src
+        └── vrx
+```
+
+To create your `pep_ws` workspace:
+
+```bash
+mkdir -p ~/pep_ASNE/pep_ws/src
+```
+
 In your bash terminal, clone the `pep_repo` repository with SSH:
 
 ```bash
+cd ~/pep_ASNE/pep_ws/src
 git clone git@github.com:pgh-pep/pep_repo.git
 ```
+
+If you want to utilize the VRX simulation software:
+```bash
+mkdir -p ~/pep_ASNE/vrx_ws/src
+cd ~/pep_ASNE/vrx_ws/src
+git clone git@github.com:pgh-pep/vrx.git
+
+#  Install required dependencies
+cd ..
+rosdep install --from-paths src --ignore-src -r -y --rosdistro humble
+
+```
+
+You must also install Gazebo Garden:
+
+```bash
+# You must remove prior versions of Gazebo before Garden (can reinstall later):
+sudo apt-get remove gazebo*  
+
+#  Install necessary tools
+sudo apt-get update
+sudo apt-get install lsb-release curl gnupg
+
+#  Install Gazebo Garden
+sudo curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+sudo apt-get update
+sudo apt-get install gz-garden ros-humble-ros-gzgarden ros-humble-xacro python3-sdformat13
+
+# Reinstall Gazebo 11 if needed
+sudo add-apt-repository ppa:openrobotics/gazebo11-gz-cli
+sudo apt update
+sudo apt-get install gazebo11
+sudo apt install ros-humble-gazebo-ros-pkgs
+
+```
+
+Further instructions regarding VRX simulation can be found [here](https://github.com/osrf/vrx/wiki/installation_tutorial).
+
 
 To edit the code using VSCode, either open using bash:
 
 ```bash
-cd pep_repo
+cd ~/pep_ASNE/pep_ws
 code .
 ```
 
