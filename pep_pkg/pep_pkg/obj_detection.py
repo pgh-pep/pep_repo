@@ -6,7 +6,11 @@ from cv_bridge import CvBridge
 import cv2
 import pyrealsense2 as rs
 import numpy as np
+<<<<<<< HEAD
 #a
+=======
+
+>>>>>>> main
 class RealsensePublisher(Node):
     def __init__(self):
         super().__init__("realsense_publisher")
