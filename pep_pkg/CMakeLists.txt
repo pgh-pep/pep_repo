@@ -45,7 +45,15 @@ install(PROGRAMS
     scripts/test_subscriber.py # Add each python node
     pep_pkg/sub_test.py
     pep_pkg/yolo_detection.py
+    pep_pkg/data_pub.py
+    pep_pkg/data_sub.py
+
     DESTINATION lib/${PROJECT_NAME}
+)
+
+# Install launch files
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
 )
 
 ament_package()

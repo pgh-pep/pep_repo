@@ -15,10 +15,10 @@ import numpy as np
 class YoloDetection(Node):
     def __init__(self):
         super().__init__("yolo_subscriber")
-        self.subscription_rgb = self.create_subscription(Image, "rgb_frame", self.rgb_frame_callback, 10)
-        # self.subscription_depth = self.create_subscription(Image, "depth_frame", self.depth_frame_callback,10)
+        self.subscription_rgb = self.create_subscription(Image, "rgb_frame", self.rgb_frame_callback, 5)
+        self.subscription_depth = self.create_subscription(Image, "depth_frame", self.depth_frame_callback,5)
         self.br_rgb = CvBridge()
-        # self.br_depth = CvBridge()
+        self.br_depth = CvBridge()
         self.yolo = YOLO("yolo11n.pt")
         self.yolo.eval()
         
@@ -28,22 +28,32 @@ class YoloDetection(Node):
         #self.get_logger().warning("Receiving RGB frame")
         current_frame = self.br_rgb.imgmsg_to_cv2(data)
 
-        detections = self.yolo(np.array(current_frame))[0].plot()
+        detections = self.yolo(current_frame)
+
+        for result in detections[0]:
+            box = result.boxes.xyxy.tolist()[0]
+            x1 = int(box[0])
+            y1 = int(box[1])
+            x2 = int(box[2])
+            y2 = int(box[3])
+            mat = current_frame[y1:y2, x1:x2]
+            cv2.imshow("ai", mat)
+            cv2.waitKey(1)
+
+
         
-        cv2.imshow("ai", detections)
+        #print(detections)
+        #print(detections.dtype)
+        
+        
+
+    def depth_frame_callback(self, data):
+        # self.get_logger().warning("Receiving depth frame")
+        current_frame = self.br_depth.imgmsg_to_cv2(data)
+        cv2.imshow("depth", current_frame)
         cv2.waitKey(1)
 
-        
-        print(detections)
-        print(detections.dtype)
-        
-        
-
-    # def depth_frame_callback(self, data):
-    #     self.get_logger().warning("Receiving depth frame")
-    #     current_frame = self.br_depth.imgmsg_to_cv2(data)
-    #     cv2.imshow("depth", current_frame)
-    #     cv2.waitKey(1)
+    
 
 
 

@@ -6,21 +6,17 @@ from cv_bridge import CvBridge
 import cv2
 import pyrealsense2 as rs
 import numpy as np
-<<<<<<< HEAD
-#a
-=======
 
->>>>>>> main
 class RealsensePublisher(Node):
     def __init__(self):
         super().__init__("realsense_publisher")
-        self.rs_publisher_rgb = self.create_publisher(Image, "rgb_frame", 10)
-        self.rs_publisher_depth = self.create_publisher(Image, "depth_frame", 10)
-        #self.rs_publisher_slice = self.create_publisher(object, "depth_slice", 10)
+        self.rs_publisher_rgb = self.create_publisher(Image, "rgb_frame", 5)
+        self.rs_publisher_depth = self.create_publisher(Image, "depth_frame", 5)
+        # self.rs_publisher_slice = self.create_publisher(object, "depth_slice", 10)
         self.br_rgb = CvBridge()
         self.br_depth = CvBridge()
 
-        timer_period = 0.05
+        timer_period = .03
         
         self.pipe = rs.pipeline()
         self.cfg  = rs.config()
