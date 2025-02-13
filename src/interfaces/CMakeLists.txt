@@ -18,8 +18,8 @@ find_package(rosidl_default_generators REQUIRED)
 # Generates our custom interfaces
 rosidl_generate_interfaces(${PROJECT_NAME}
     "msg/DepthSlice.msg"
-    "msg/BuoyLocation.msg"
-    "srv/GetBuoyLocation.srv"
+    "msg/BoundingBox2D.msg"
+    "msg/BoundingBox2DArray.msg"
     DEPENDENCIES std_msgs
 )
 
