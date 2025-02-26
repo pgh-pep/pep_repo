@@ -28,25 +28,26 @@ class ObjectDetection(Node):
         color_image = self.bridge.imgmsg_to_cv2(color_msg, desired_encoding="passthrough")
         color_image_rgb = cv2.cvtColor(color_image, cv2.COLOR_BGR2RGB)
 
-        boxes = self.model(color_image_rgb)[0].boxes.xyxy.tolist()  # Run the YOLO model on the image
+        results = self.model(color_image_rgb)  # Run the YOLO model on the image
         bounding_boxes = BoundingBox2DArray()
         bounding_boxes.header.stamp = self.get_clock().now().to_msg()
         bounding_boxes.header.frame_id = color_msg.header.frame_id
 
         self.get_logger().info("In color callback")
-        for box in boxes:
-            x1, y1, x2, y2 = int(box[0]), int(box[1]), int(box[2]), int(box[3])
+        for result in results:
+            for box in result.boxes:
+                x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
 
-            self.get_logger().info(f"Buoy detected at ({x1}, {y1}) with width {x2 - x1} and height {y2 - y1}")
+                self.get_logger().info(f"Object detected at top-left: ({x1}, {y1}); bottom-right: ({x2}, {y2})")
 
-            bounding_box = BoundingBox2D()
-            bounding_box.x1 = x1
-            bounding_box.y1 = y1
-            bounding_box.x2 = x2
-            bounding_box.y2 = y2
+                bounding_box = BoundingBox2D()
+                bounding_box.x1 = x1
+                bounding_box.y1 = y1
+                bounding_box.x2 = x2
+                bounding_box.y2 = y2
 
-            bounding_boxes.boxes.append(bounding_box)
-            cv2.rectangle(color_image_rgb, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                bounding_boxes.boxes.append(bounding_box)
+                cv2.rectangle(color_image_rgb, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
         cv2.imshow("Object Detection", color_image_rgb)
         cv2.waitKey(1)
