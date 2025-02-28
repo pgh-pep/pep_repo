@@ -14,6 +14,7 @@ find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 
 find_package(std_msgs REQUIRED)
+find_package(ackermann_msgs REQUIRED)
 
 find_package(OpenCV REQUIRED)
 find_package(cv_bridge REQUIRED)
@@ -28,11 +29,21 @@ install(
 
 # Create Cpp executables
 add_executable(publisher src/test_publisher.cpp) # Need for each node
-ament_target_dependencies(publisher rclcpp std_msgs) # Add both nodes and dependencies
+add_executable(path_planning_node src/path_planning_node.cpp)
+ament_target_dependencies(publisher
+    rclcpp 
+    std_msgs 
+) # Add both nodes and dependencies
+
+ament_target_dependencies(path_planning_node
+    rclcpp 
+    ackermann_msgs
+)
 
 # Install Cpp executables
 install(TARGETS
     publisher
+    path_planning_node
     DESTINATION lib/${PROJECT_NAME}
 )
 
