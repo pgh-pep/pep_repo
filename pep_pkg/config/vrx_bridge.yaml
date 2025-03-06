@@ -1,0 +1,54 @@
+- ros_topic_name: "clock"
+  gz_topic_name: "clock"
+  ros_type_name: "rosgraph_msgs/msg/Clock"
+  gz_type_name: "gz.msgs.Clock"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/pep_bot/joint_states"
+  gz_topic_name: "joint_states"
+  ros_type_name: "sensor_msgs/msg/JointState"
+  gz_type_name: "gz.msgs.Model"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/pep_bot/joint/left_engine_propeller_joint/cmd_thrust"
+  gz_topic_name: "/model/pep_bot/joint/left_engine_propeller_joint/cmd_thrust"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "/model/pep_bot/joint/right_engine_propeller_joint/cmd_thrust"
+  gz_topic_name: "/model/pep_bot/joint/right_engine_propeller_joint/cmd_thrust"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "/pep_bot/imu"
+  gz_topic_name: "imu"
+  ros_type_name: "sensor_msgs/msg/Imu"
+  gz_type_name: "gz.msgs.IMU"
+  lazy: true
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/pep_bot/camera_info"
+  gz_topic_name: "/camera/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+# - ros_topic_name: "/pep_bot/odometry/gt"
+#   gz_topic_name: "/model/pep_bot/odometry"
+#   ros_type_name: "nav_msgs/msg/Odometry"
+#   gz_type_name: "gz.msgs.Odometry"
+#   direction: GZ_TO_ROS
+
+# - ros_topic_name: "/tf"
+#   gz_topic_name: "/model/pep_bot/pose"
+#   ros_type_name: "tf2_msgs/msg/TFMessage"
+#   gz_type_name: "ignition.msgs.Pose_V"
+#   direction: GZ_TO_ROS
+
+# - ros_topic_name: "/tf_static"
+#   gz_topic_name: "/model/pep_bot/pose_static"
+#   ros_type_name: "tf2_msgs/msg/TFMessage"
+#   gz_type_name: "ignition.msgs.Pose_V"
+#   direction: GZ_TO_ROS
