@@ -78,7 +78,7 @@ joy_teleop:
     left_thrust:
       type: topic
       interface_type: std_msgs/msg/Float64
-      topic_name: /model/roboboat01/joint/left_engine_propeller_joint/cmd_thrust
+      topic_name: /model/pep_bot/joint/left_engine_propeller_joint/cmd_thrust
       deadman_buttons: [4]
       axis_mappings:
         data:
@@ -89,7 +89,7 @@ joy_teleop:
     right_thrust:
       type: topic
       interface_type: std_msgs/msg/Float64
-      topic_name: /model/roboboat01/joint/right_engine_propeller_joint/cmd_thrust
+      topic_name: /model/pep_bot/joint/right_engine_propeller_joint/cmd_thrust
       deadman_buttons: [4]
       axis_mappings:
         data:
