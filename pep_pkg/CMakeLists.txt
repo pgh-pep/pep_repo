@@ -27,6 +27,11 @@ install(
     DESTINATION share/${PROJECT_NAME}
 )
 
+install(FILES
+    config/path_planning_params.yaml # Install the YAML file
+    DESTINATION share/${PROJECT_NAME}/config
+)
+
 # Create Cpp executables
 add_executable(publisher src/test_publisher.cpp) # Need for each node
 add_executable(path_planning_node src/path_planning_node.cpp)
