@@ -13,6 +13,7 @@
     <depend>rclcpp</depend>
     <depend>rclpy</depend>
     <depend>std_msgs</depend>
+    <depend>ackermann_msgs</depend>
 
 
     <test_depend>ament_lint_auto</test_depend>
