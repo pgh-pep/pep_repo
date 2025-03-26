@@ -1,6 +1,8 @@
 #include "rclcpp/rclcpp.hpp"
 #include "ackermann_msgs/msg/ackermann_drive_stamped.hpp"
-#include "path_planning/goal_points.cpp"
+#include "path_planning/goal_points_generator.cpp"
+#include "path_planning/goal_looper.cpp"
+#include <array>
 
 class PathPlanningNode : public rclcpp::Node
 {
@@ -30,22 +32,38 @@ public:
             std::chrono::milliseconds(100),
             std::bind(&PathPlanningNode::publishAckermannCommand, this));
 
-        goal_points_generator_ = std::make_shared<GoalPointsGenerator>();
+        // Generate goal points based on buoy positions
+        std::array<std::array<double,2>, 6> goal_points_ = generateGoalPoints();
+        
+        // Initialize the GoalLooper with the generated goal points
+        this->goal_looper = std::make_shared<GoalLooper>(goal_points_);   
+        current_position_ = {top_buoy_x_, top_buoy_y_};
+    }
 
-        goal_points_ = goal_points_generator_->get_points(top_buoy_x_, top_buoy_y_, bottom_buoy_x_, bottom_buoy_y_);
+private:
+    std::array<std::array<double, 2>, 6> generateGoalPoints()
+    {
+        GoalPointsGenerator* goal_points_generator_ = new GoalPointsGenerator();
+
+        std::array<std::array<double, 2>, 6> goal_points_ = goal_points_generator_->get_points(top_buoy_x_, top_buoy_y_, bottom_buoy_x_, bottom_buoy_y_);
 
         RCLCPP_INFO(this->get_logger(), "Generated goal points:");
         for (const auto& point : goal_points_) {
             RCLCPP_INFO(this->get_logger(), "Point: (%f, %f)", point[0], point[1]);
         }
+        delete goal_points_generator_;
+        return goal_points_;
     }
 
-private:
     void publishAckermannCommand()
     {
         auto message = ackermann_msgs::msg::AckermannDriveStamped();
         message.header.stamp = this->get_clock()->now();
         message.header.frame_id = "base_link";
+
+        auto next_goal = this->goal_looper->loopGoals(current_position_);
+        RCLCPP_INFO(this->get_logger(), "Current Position: (%f, %f)", current_position_[0], current_position_[1]);
+        RCLCPP_INFO(this->get_logger(), "Next Goal: (%f, %f)", next_goal[0], next_goal[1]);
         
         message.drive.steering_angle = 0.0;
         message.drive.speed = 1.0;
@@ -55,6 +73,12 @@ private:
 
     rclcpp::Publisher<ackermann_msgs::msg::AckermannDriveStamped>::SharedPtr publisher_;
     rclcpp::TimerBase::SharedPtr timer_;
+    std::shared_ptr<GoalLooper> goal_looper;
+    double top_buoy_x_;
+    double top_buoy_y_;
+    double bottom_buoy_x_;
+    double bottom_buoy_y_;
+    std::array<double, 2> current_position_;
     size_t count_;
 };
 
