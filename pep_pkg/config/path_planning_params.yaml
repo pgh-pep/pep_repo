@@ -1,0 +1,6 @@
+path_planning_node:
+  ros__parameters:
+    top_buoy_x: 0.0
+    top_buoy_y: 0.0
+    bottom_buoy_x: 10.0
+    bottom_buoy_y: 15.0
