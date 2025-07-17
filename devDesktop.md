@@ -14,14 +14,14 @@ NOTE: WSL install instructions vary depending on Windows version. For help on an
 - <https://learn.microsoft.com/en-us/windows/wsl/install-manual>
 - <https://learn.microsoft.com/en-us/windows/wsl/troubleshooting>
 
-To install WSL2, in a PowerShell or Windows Command Prompt run:
+To install WSL2, in a PowerShell or Windows Command Prompt, run:
 
 ```powershell
 wsl --install -d Ubuntu-22.04
 wsl --set-default-version 2
 ```
 
-You will be promted to enter a username and password followed by a successful installation message.
+You will be prompted to enter a username and password, followed by a successful installation message.
 (Your password will not be shown when typing for security reasons)
 
 To confirm a successful installation of WSL and Ubuntu, you can list your currently installed distros with:
@@ -186,7 +186,7 @@ sudo apt install ros-humble-gazebo-ros-pkgs
 Further instructions regarding VRX simulation can be found [here](https://github.com/osrf/vrx/wiki/installation_tutorial).
 
 
-To edit the code using VSCode, either open using bash:
+To edit the code using VSCode, either open it using the bash terminal:
 
 ```bash
 cd ~/pep_ASNE/pep_ws
@@ -194,14 +194,14 @@ code .
 ```
 
 Or open up [VSCode](https://code.visualstudio.com/download) on your Windows machine. Install the Remote Development Extension.
-In the bottom-left, click on the Remote Window button (blue w/ arrows).
+In the bottom left, click on the Remote Window button (blue w/ arrows).
 ![alt text](https://canonical-ubuntu-wsl.readthedocs-hosted.com/en/latest/_images/remote-extension.png)
 
 Select `Connect to WSL using Distro` and select `Ubuntu-22.04`.
 
 This will open VSCode in your newly made WSL environment.
 
-Install the reccomended VSCode extensions and install PyPI dependencies with:
+Install the recommended VSCode extensions and install PyPI dependencies with:
 
 ```bash
 pip install -r requirements.txt
